@@ -24,7 +24,7 @@ public class ProductController {
 
    //get a single product by its id
     @GetMapping("/product")
-    public ResponseEntity<Product> getProduct(@RequestParam(name = "productId") long productId) {
+    public ResponseEntity<Product> getProduct(@PathVariable(name = "productId") long productId) {
         Product product = productService.getProduct(productId);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
@@ -37,21 +37,21 @@ public class ProductController {
 
     //update an existing product in the database
     @PatchMapping("/product")
-    public ResponseEntity<Product> updateProduct(@RequestParam(name ="productId") long productId, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable(name ="productId") long productId, @RequestBody Product product) {
         Product updatedProduct = productService.updateProduct(productId, product);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
     // delete an existing product in the database
     @DeleteMapping("/product")
-    public ResponseEntity<Product> deleteProduct(@RequestParam(name ="productId") long productId) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable(name ="productId") long productId) {
         Product deletedProduct = productService.deleteproduct(productId);
         return new ResponseEntity<>(deletedProduct, HttpStatus.OK);
     }
 
     // get product by name using a raw SQL statement
     @GetMapping("/products-by-name")
-    public List<Product> getProductsByName(@RequestParam(name ="productName") String productName) {
+    public List<Product> getProductsByName(@PathVariable(name ="productName") String productName) {
         return productService.getProductsByName(productName);
     }
 
